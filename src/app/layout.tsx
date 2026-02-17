@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Navbar from "src/components/Navbar";
 import PageTransition from "../components/PageTransition";
 import "./globals.css";
+import Footer from "src/components/Footer";
 
 
 type RootLayoutProps = {
@@ -16,6 +17,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <PageTransition>
           {children}
         </PageTransition>
+        <Footer />
+
       </body>
     </html>
   );
