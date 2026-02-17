@@ -1,19 +1,21 @@
+import type { ReactNode } from "react";
+import Navbar from "src/components/Navbar";
+import PageTransition from "../components/PageTransition";
 import "./globals.css";
 
-export const metadata = {
-  title: "Meu Projeto",
-  description: "Projeto Next.js do zero",
+
+type RootLayoutProps = {
+  children: ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="pt-BR">
-      <body className="bg-zinc-950 text-zinc-100">
-        {children}
+    <html lang="pt">
+      <body className="bg-zinc-950 text-white overflow-x-hidden">
+        <Navbar />
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );
