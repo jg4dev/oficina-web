@@ -1,23 +1,27 @@
-import type { ReactNode } from "react";
-import Navbar from "src/components/Navbar";
-import PageTransition from "../components/PageTransition";
 import "./globals.css";
+import type { ReactNode } from "react";
+
+import Navbar from "src/components/Navbar";
 import Footer from "src/components/Footer";
+import PageTransition from "src/components/PageTransition";
 
-
-type RootLayoutProps = {
+export default function RootLayout({
+  children,
+}: {
   children: ReactNode;
-};
-
-export default function RootLayout({ children }: RootLayoutProps) {
+}) {
   return (
-    <html lang="pt">
-      <body className="bg-zinc-950 text-white overflow-x-hidden">
+    <html lang="pt-BR">
+      <body className="bg-neutral-950 text-white">
+
         <Navbar />
+
         <PageTransition>
           {children}
         </PageTransition>
+
         <Footer />
+
 
       </body>
     </html>

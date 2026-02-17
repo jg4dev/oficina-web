@@ -1,17 +1,86 @@
 @import "tailwindcss";
+
+/* ====== PALETA GLOBAL ====== */
 :root {
-  --background: #0b0f19;
-  --foreground: #e5e7eb;
-  --primary: #e11d48;
-  --card: #111827;
+  --background: #111111;          /* fundo quase preto */
+  --background-gradient: linear-gradient(180deg, #111111 0%, #1a1a1a 100%); /* fundo suave */
+  --card: #1b1b1f;                /* cards um pouco mais claros */
+  --card-hover: #222227;          /* cards em hover */
+  --border: transparent;           /* sem divisórias */
+  --foreground: #f3f4f6;          /* texto principal */
+  --muted: #9ca3af;               /* texto secundário */
+  --primary: #dc2626;             /* vermelho para botões */
+  --primary-hover: #b91c1c;       /* hover botão */
 }
 
+/* ====== BASE ====== */
+html,
 body {
-  background: radial-gradient(circle at 20% 20%, #1f1f1f 0%, #0b0f19 60%);
-  color: var(--foreground);
+  height: 100%;
   font-family: Inter, system-ui, sans-serif;
+  background: var(--background-gradient);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
 }
-@keyframes fadeIn {
+
+/* ====== SEÇÕES ====== */
+section {
+  background: var(--background-gradient); /* fundo contínuo */
+  color: var(--foreground);
+  padding: 4rem 1.5rem;
+  border: none; /* remove todas as divisões */
+}
+
+/* ====== CARDS ====== */
+.card {
+  background-color: var(--card);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  color: var(--foreground);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5); /* sombra sutil */
+}
+
+.card:hover {
+  background-color: var(--card-hover);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7); /* sombra maior no hover */
+  transform: translateY(-2px); /* leve elevação */
+}
+
+/* ====== BOTÕES ====== */
+.button-primary {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.button-primary:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+/* ====== LINKS ====== */
+a {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* ====== ANIMAÇÃO ====== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -19,5 +88,5 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
