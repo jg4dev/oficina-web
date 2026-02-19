@@ -50,7 +50,7 @@ export default function Login() {
           required
         />
 
-        <button className="w-full py-2 bg-pink-600 hover:bg-pink-500 rounded-lg text-neutral-100 font-semibold">
+        <button className="w-full py-2 bg-red-600 hover:bg-red-300 rounded-lg text-neutral-100 font-semibold">
           Entrar
         </button>
       </form>
