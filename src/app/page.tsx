@@ -1,6 +1,21 @@
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 
+
 export default function Home() {
+  const router = useRouter();
+
+useEffect(() => {
+  const logado = localStorage.getItem("logado");
+
+  if (!logado) {
+    router.push("/login");
+  }
+}, []);
+
   return (
     <main className="bg-neutral-900 text-white">
 

@@ -122,6 +122,34 @@ export default function Servicos() {
                 <li>✔ Serviço de qualidade</li>
               </ul>
             </div>
+                                   {/* Serviço 8 */}
+            <div className="bg-neutral-950 p-8 rounded-xl border border-neutral-800 hover:border-red-600 transition-all duration-300 group">
+              <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-red-500 transition-colors">
+                Lona de freios
+              </h3>
+              <p className="text-neutral-400 text-sm mb-6">
+                Verificaçãp e execução do serviço.
+              </p>
+              <ul className="text-neutral-500 text-sm space-y-2">
+                <li>✔ Troca das lonas</li>
+                <li>✔ Limpeza do local</li>
+                <li>✔ Serviço de qualidade</li>
+              </ul>
+            </div>
+                                   {/* Serviço 9 */}
+            <div className="bg-neutral-950 p-8 rounded-xl border border-neutral-800 hover:border-red-600 transition-all duration-300 group">
+              <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-red-500 transition-colors">
+                Correia dentada
+              </h3>
+              <p className="text-neutral-400 text-sm mb-6">
+                Vereficação da qualidade da correia e troca.
+              </p>
+              <ul className="text-neutral-500 text-sm space-y-2">
+                <li>✔ Correia de alta qualidade</li>
+                <li>✔ Serviço com precisão</li>
+                <li>✔ Ferramentas adequadas</li>
+              </ul>
+            </div>
 
           </div>
 
