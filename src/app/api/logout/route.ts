@@ -4,6 +4,7 @@ export async function POST() {
   const response = NextResponse.json({ success: true });
 
   response.cookies.set("logado", "", {
+    httpOnly: true,
     expires: new Date(0),
     path: "/",
   });
