@@ -1,18 +1,19 @@
-"use client";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+export default async function Home() {
+  const cookieStore = await cookies(); // 👈 precisa de await
+  const logado = cookieStore.get("logado");
 
-export default function Home() {
-  const router = useRouter();
+  if (!logado) {
+    redirect("/login");
+  }
 
-  useEffect(() => {
-    const logado = localStorage.getItem("logado");
-
-    if (!logado) {
-      router.push("/login");
-    }
-  }, [router]);
-
-  return <main className="min-h-screen bg-neutral-950" />;
+  return (
+    <main className="min-h-screen bg-neutral-950 flex items-center justify-center text-white">
+      <h1 className="text-3xl font-bold">
+        Bem-vindo, você está logado!
+      </h1>
+    </main>
+  );
 }

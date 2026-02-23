@@ -11,22 +11,25 @@ export default function Login() {
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setErro("");
+    setLoading(true);
 
-    if (email === "admin@oficina.com" && senha === "123456") {
-      setLoading(true);
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, senha }),
+    });
 
-      // Criar cookie válido por 1 dia
-      document.cookie =
-        "logado=true; path=/; max-age=86400; SameSite=Lax";
-
-      // Redireciona direto para /home
-      router.replace("/home");
-
+    if (res.ok) {
+      router.replace("/home"); // agora a Home protegida
+      router.refresh();
     } else {
       setErro("Email ou senha incorretos.");
+      setLoading(false);
     }
   }
 

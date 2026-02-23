@@ -4,6 +4,7 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Rotas públicas
   if (
     pathname.startsWith("/login") ||
     pathname.startsWith("/_next") ||
