@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function Login() {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -18,19 +15,20 @@ export default function Login() {
 
     const res = await fetch("/api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, senha }),
     });
 
-    if (res.ok) {
-      router.replace("/home"); // agora a Home protegida
-      router.refresh();
-    } else {
+    if (!res.ok) {
       setErro("Email ou senha incorretos.");
       setLoading(false);
+      return;
     }
+
+    const data = await res.json();
+
+    // Redirecionamento garantido
+    window.location.href = data.redirectTo;
   }
 
   return (
@@ -42,41 +40,34 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className="space-y-4">
 
-          <div>
-            <label className="block mb-1 text-sm">Email</label>
-            <input
-              type="email"
-              placeholder="Digite seu email"
-              className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-red-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-          <div>
-            <label className="block mb-1 text-sm">Senha</label>
-            <input
-              type="password"
-              placeholder="Digite sua senha"
-              className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-red-500"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="Senha"
+            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            required
+          />
 
-          {erro && (
-            <p className="text-red-500 text-sm">{erro}</p>
-          )}
+          {erro && <p className="text-red-500 text-sm">{erro}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-red-600 hover:bg-red-700 transition p-3 rounded-lg font-semibold disabled:opacity-50"
+            className="w-full bg-red-600 p-3 rounded-lg"
           >
             {loading ? "Entrando..." : "Entrar"}
           </button>
+
         </form>
       </div>
     </main>

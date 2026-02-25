@@ -3,24 +3,37 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   const { email, senha } = await req.json();
 
-  console.log("Email recebido:", email);
-  console.log("Senha recebida:", senha);
+  let role: "admin" | "mecanico" | null = null;
+  let redirectUrl: string | null = null;
 
-  if (email === "admin@email.com" && senha === "123") {
-    const response = NextResponse.json({ success: true });
-
-    response.cookies.set("logado", "true", {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      path: "/",
-    });
-
-    return response;
+  if (email === "admin@oficina.com" && senha === "1") {
+    role = "admin";
+    redirectUrl = "/admin/os";
+  } else if (email === "mecanico@oficina.com" && senha === "12") {
+    role = "mecanico";
+    redirectUrl = "/mecanico/os";
   }
 
-  return NextResponse.json(
-    { error: "Credenciais inválidas" },
-    { status: 401 }
-  );
+  if (!role || !redirectUrl) {
+    return NextResponse.json(
+      { error: "Credenciais inválidas" },
+      { status: 401 }
+    );
+  }
+
+  const response = NextResponse.json({ redirectTo: redirectUrl });
+
+  response.cookies.set("logado", "true", {
+    httpOnly: true,
+    path: "/",
+    sameSite: "lax",
+  });
+
+  response.cookies.set("role", role, {
+    httpOnly: true,
+    path: "/",
+    sameSite: "lax",
+  });
+
+  return response;
 }
